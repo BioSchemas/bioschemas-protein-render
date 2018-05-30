@@ -1,0 +1,46 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>bioschemas-uniprot-render-demo</title>
+
+</head>
+<body>
+<bioschemas-uniprot-render accession="P05067"></bioschemas-uniprot-render>
+
+<!-- Required for IE11 -->
+<script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+<!-- Web component polyfill (only loads what it needs) -->
+<script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
+<!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+<script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
+
+<script src="../node_modules/protvista-uniprot-entry-adapter/dist/ProtVistaUniProtEntryAdapter.js" charset="utf-8" defer></script>
+<script src="../node_modules/data-loader/dist/index.js" charset="utf-8" defer></script>
+<script src="../node_modules/bioschemas-uniprot-adapter/dist/BioschemasUniProtAdapter.js" charset="utf-8" defer></script>
+<script src="../dist/BioschemasUniProtRender.js" charset="utf-8" defer></script>
+
+<script>
+    for (const adapter of document.querySelectorAll('bioschemas-uniprot-render')) {
+        adapter.addEventListener(
+            'load',
+            e => {
+                console.log('Data loaded');
+                console.log(e.target);
+                console.log(e.detail);
+            }
+        );
+        adapter.addEventListener(
+            'error',
+            e => {
+                console.log('error');
+                console.log(e.target);
+                console.log(e.detail);
+            }
+        );
+    }
+</script>
+
+</body>
+</html>

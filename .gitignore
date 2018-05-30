@@ -1,23 +1,24 @@
-# Compiled class file
-*.class
+.DS_Store
 
-# Log file
+npm-debug.log
+yarn.lock
+
+dist
+node_modules
+package-lock.json
+
+.idea
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+coverage
+.info
+.coveralls.yml
+.sass-cache
+.project
+.settings
+config.rb
+*.iml
+reports
+_includes
+_posts
+_sass
+_site
