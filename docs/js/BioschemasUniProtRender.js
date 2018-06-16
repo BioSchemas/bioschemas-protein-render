@@ -196,6 +196,7 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
         var _this = possibleConstructorReturn(this, (BioschemasUniProtRender.__proto__ || Object.getPrototypeOf(BioschemasUniProtRender)).call(this));
 
         _this._proteinSchema = {};
+        _this._structureSchema = {};
         return _this;
     }
 
@@ -207,14 +208,15 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
         value: function attributeChangedCallback(name, oldValue, newValue) {
             // name will always be "accession" due to observedAttributes
             this._accession = newValue;
+            this._uniprotAdapterID = 'uniprot-adapter';
+            this._pdbeAdapterID = 'pdbe-adapter';
             this._init();
         }
     }, {
-        key: '_renderEntry',
-        value: function _renderEntry() {
-            console.log('render', this._proteinSchema);
+        key: '_renderSchema',
+        value: function _renderSchema(schema) {
             var div = document.createElement('div');
-            div.innerText = JSON.stringify(this._proteinSchema, null, 2);
+            div.innerText = JSON.stringify(schema, null, 2);
             document.body.appendChild(div);
         }
     }, {
@@ -226,6 +228,7 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
 
             if (this._accession && this._accession.length !== 0) {
                 var adapter = document.createElement('bioschemas-uniprot-adapter');
+                adapter.id = this._uniprotAdapterID;
                 var loader = document.createElement('data-loader');
                 var source = document.createElement('source');
 
@@ -233,6 +236,16 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
                 loader.appendChild(source);
                 adapter.appendChild(loader);
                 this.appendChild(adapter);
+
+                var adapterPDB = document.createElement('bioschemas-pdbe-adapter');
+                adapterPDB.id = this._pdbeAdapterID;
+                var loaderPDB = document.createElement('data-loader');
+                var sourcePDB = document.createElement('source');
+
+                sourcePDB.setAttribute('src', 'http://www.ebi.ac.uk/pdbe/api/pdb/entry/summary/1BZG');
+                loaderPDB.appendChild(sourcePDB);
+                adapterPDB.appendChild(loaderPDB);
+                this.appendChild(adapterPDB);
 
                 this._addLoaderListeners();
             }
@@ -249,8 +262,13 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
                         if (e.detail.payload.errorMessage) {
                             throw e.detail.payload.errorMessage;
                         }
-                        _this2._proteinSchema = e.detail.payload;
-                        _this2._renderEntry();
+                        if (e.target.id === _this2._uniprotAdapterID) {
+                            _this2._proteinSchema = e.detail.payload;
+                            _this2._renderSchema(_this2._proteinSchema);
+                        } else if (e.target.id === _this2._pdbeAdapterID) {
+                            _this2._structureSchema = e.detail.payload;
+                            _this2._renderSchema(_this2._structureSchema);
+                        }
                     } catch (error) {
                         _this2.dispatchEvent(new CustomEvent('error', {
                             detail: error,
@@ -265,6 +283,11 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
         key: 'proteinSchema',
         get: function get$$1() {
             return this._proteinSchema;
+        }
+    }, {
+        key: 'structureSchema',
+        get: function get$$1() {
+            return this._structureSchema;
         }
     }, {
         key: 'accession',
