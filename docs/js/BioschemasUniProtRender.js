@@ -216,11 +216,6 @@ var BioschemasUniProtRender$1 = function (_HTMLElement) {
             var div = document.createElement('div');
             div.innerText = JSON.stringify(this._proteinSchema, null, 2);
             document.body.appendChild(div);
-
-            var s = document.createElement('script');
-            s.type = 'application/ld+json';
-            s.innerHTML = JSON.stringify(this._proteinSchema, null, 2);
-            document.body.appendChild(s);
         }
     }, {
         key: '_init',

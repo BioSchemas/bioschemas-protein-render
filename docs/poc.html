@@ -7,7 +7,11 @@
 
 </head>
 <body>
-<bioschemas-uniprot-render accession="P05067"></bioschemas-uniprot-render>
+<bioschemas-uniprot-adapter id="adapter1">
+    <data-loader id="loader1">
+        <source src="https://www.ebi.ac.uk/proteins/api/proteins/P05067" />
+    </data-loader>
+</bioschemas-uniprot-adapter>
 
 <!-- Required for IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>

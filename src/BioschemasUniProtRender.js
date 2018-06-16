@@ -34,11 +34,6 @@ export default class BioschemasUniProtRender extends HTMLElement {
         const div = document.createElement('div');
         div.innerText = JSON.stringify(this._proteinSchema, null, 2);
         document.body.appendChild(div);
-
-        const s = document.createElement('script');
-        s.type = 'application/ld+json';
-        s.innerHTML = JSON.stringify(this._proteinSchema, null, 2);
-        document.body.appendChild(s);
     }
 
     _init() {

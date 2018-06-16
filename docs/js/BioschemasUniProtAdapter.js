@@ -3129,6 +3129,71 @@ var assign$1 = createAssigner(function(object, source) {
   }
 });
 
+/**
+ * The base implementation of `_.map` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function baseMap(collection, iteratee) {
+  var index = -1,
+      result = isArrayLike(collection) ? Array(collection.length) : [];
+
+  baseEach(collection, function(value, key, collection) {
+    result[++index] = iteratee(value, key, collection);
+  });
+  return result;
+}
+
+/**
+ * Creates an array of values by running each element in `collection` thru
+ * `iteratee`. The iteratee is invoked with three arguments:
+ * (value, index|key, collection).
+ *
+ * Many lodash methods are guarded to work as iteratees for methods like
+ * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
+ *
+ * The guarded methods are:
+ * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+ * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+ * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+ * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Collection
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ * @example
+ *
+ * function square(n) {
+ *   return n * n;
+ * }
+ *
+ * _.map([4, 8], square);
+ * // => [16, 64]
+ *
+ * _.map({ 'a': 4, 'b': 8 }, square);
+ * // => [16, 64] (iteration order is not guaranteed)
+ *
+ * var users = [
+ *   { 'user': 'barney' },
+ *   { 'user': 'fred' }
+ * ];
+ *
+ * // The `_.property` iteratee shorthand.
+ * _.map(users, 'user');
+ * // => ['barney', 'fred']
+ */
+function map$1(collection, iteratee) {
+  var func = isArray(collection) ? arrayMap : baseMap;
+  return func(collection, baseIteratee(iteratee, 3));
+}
+
 var context = {
     "@context": ["http://schema.org", {
         "@base": "http://schema.org"
@@ -3360,19 +3425,32 @@ var ParserHelper = function () {
         value: function _adaptRecord() {
             this._adaptedData = assign$1(this._adaptedData, {
                 "@type": "DataRecord",
-                "@id": "http://www.identifiers.org/uniprot/" + this._entry.accession,
+                "@id": 'http://www.identifiers.org/uniprot:' + this._entry.accession,
                 "identifier": this._entry.accession,
-                "url": "http://www.uniprot.org/uniprot/" + this._entry.accession,
+                "url": 'http://www.uniprot.org/uniprot/' + this._entry.accession,
                 "dateCreated": this._entry.info.created,
                 "dateModified": this._entry.info.modified,
                 "version": this._entry.info.version,
                 "distribution": {
                     "@type": "DataDownload",
-                    "url": "http://www.uniprot.org/uniprot/" + this._entry.accession + ".fasta"
+                    "url": 'http://www.uniprot.org/uniprot/' + this._entry.accession + '.fasta'
                 },
-
-                "seeAlso": ["TODO PDBe"]
+                "sameAs": 'http://purl.uniprot.org/uniprot/' + this._entry.accession
             });
+            //this._adaptStructures();
+        }
+    }, {
+        key: '_adaptStructures',
+        value: function _adaptStructures() {
+            var structures = filter$1(this._entry.dbReferences, function (reference) {
+                return reference.type === 'PDB';
+            });
+
+            if (structures && structures.length !== 0) {
+                this._adaptedData.seeAlso = map$1(structures, function (structure) {
+                    return 'http://www.ebi.ac.uk/pdbe/entry/pdb/' + structure.id;
+                });
+            }
         }
     }, {
         key: '_adaptMinimum',
@@ -3444,7 +3522,7 @@ var ParserHelper = function () {
                             "codeValue": disease.dbReference.id,
                             "codingSystem": "MIM"
                         },
-                        "sameAs": "http://purl.uniprot.org/mim/" + disease.dbReference.id
+                        "sameAs": 'http://purl.uniprot.org/mim/' + disease.dbReference.id
                     };
                 });
             }
@@ -3458,9 +3536,9 @@ var ParserHelper = function () {
                     "identifier": '' + this._entry.organism.taxonomy,
                     "categoryCode": {
                         "codeValue": '' + this._entry.organism.taxonomy,
-                        "url": "http://purl.uniprot.org/taxonomy/" + this._entry.organism.taxonomy
+                        "url": 'http://purl.uniprot.org/taxonomy/' + this._entry.organism.taxonomy
                     },
-                    "url": "http://www.uniprot.org/taxonomy/" + this._entry.organism.taxonomy
+                    "url": 'http://www.uniprot.org/taxonomy/' + this._entry.organism.taxonomy
                 };
                 organism.name = this._entry.organism.names.map(function (name) {
                     return name.value;
@@ -3498,7 +3576,16 @@ var BioschemasUniProtAdapter$1 = function (_ProtVistaUniProtEntr) {
         key: 'parseEntry',
         value: function parseEntry(data) {
             this._adaptedData = this._parser.adaptData(data);
+            this._renderEntry();
             return this._adaptedData;
+        }
+    }, {
+        key: '_renderEntry',
+        value: function _renderEntry() {
+            var s = document.createElement('script');
+            s.type = 'application/ld+json';
+            s.innerHTML = JSON.stringify(this._adaptedData, null, 2);
+            document.body.appendChild(s);
         }
     }]);
     return BioschemasUniProtAdapter;
