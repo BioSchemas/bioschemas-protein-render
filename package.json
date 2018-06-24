@@ -1,8 +1,8 @@
 {
-  "name": "bioschemas-uniprot-render",
+  "name": "bioschemas-protein-render",
   "version": "0.0.1",
   "description": "Uses bioschemas-uniprot-adater to get the Bioschemas JSON LD for a UniProt accession and renders it in the simplest way",
-  "main": "dist/BioschemasUniProtRender.js",
+  "main": "dist/BioschemasProteinRender.js",
   "module": "src/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bioschemas/bioschemas-uniprot-render.git"
+    "url": "git+https://github.com/bioschemas/bioschemas-protein-render.git"
   },
   "keywords": [
     "Bioschemas",
@@ -24,9 +24,9 @@
   "author": "ljgarcia",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bioschemas/bioschemas-uniprot-render/issues"
+    "url": "https://github.com/bioschemas/bioschemas-protein-render/issues"
   },
-  "homepage": "https://github.com/bioschemas/bioschemas-uniprot-render#readme",
+  "homepage": "https://github.com/bioschemas/bioschemas-protein-render#readme",
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.19",
     "babel-cli": "^6.24.1",

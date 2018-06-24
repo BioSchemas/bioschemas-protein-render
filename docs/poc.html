@@ -3,11 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>bioschemas-uniprot-render-demo</title>
+    <title>bioschemas-protein-render-demo</title>
 
 </head>
 <body>
-<bioschemas-uniprot-render accession="P12272"></bioschemas-uniprot-render>
 
 <!-- Required for IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
@@ -20,7 +19,14 @@
 <script src="./js/ProtVistaUniProtEntryAdapter.js" charset="utf-8" defer></script>
 <script src="./js/BioschemasUniProtAdapter.js" charset="utf-8" defer></script>
 <script src="./js/BioschemasPDBeAdapter.js" charset="utf-8" defer></script>
-<script src="./js/BioschemasUniProtRender.js" charset="utf-8" defer></script>
+<script src="./js/BioschemasProteinRender.js" charset="utf-8" defer></script>
 
 </body>
+
+<script>
+    const accession = window.location.search.slice(1);
+    const component = document.createElement('bioschemas-protein-render');
+    component.setAttribute('accession', accession || 'P12272');
+    document.body.appendChild(component);
+</script>
 </html>

@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>bioschemas-uniprot-render-demo</title>
+    <title>bioschemas-protein-render-demo</title>
 
 </head>
 <body>
-<bioschemas-uniprot-render accession="P12272"></bioschemas-uniprot-render>
+<bioschemas-protein-render accession="P12272"></bioschemas-protein-render>
 
 <!-- Required for IE11 -->
 <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
@@ -20,10 +20,10 @@
 <script src="../node_modules/data-loader/dist/index.js" charset="utf-8" defer></script>
 <script src="../node_modules/bioschemas-uniprot-adapter/dist/BioschemasUniProtAdapter.js" charset="utf-8" defer></script>
 <script src="../node_modules/bioschemas-pdbe-adapter/dist/BioschemasPDBeAdapter.js" charset="utf-8" defer></script>
-<script src="../dist/BioschemasUniProtRender.js" charset="utf-8" defer></script>
+<script src="../dist/BioschemasProteinRender.js" charset="utf-8" defer></script>
 
 <script>
-    for (const adapter of document.querySelectorAll('bioschemas-uniprot-render')) {
+    for (const adapter of document.querySelectorAll('bioschemas-protein-render')) {
         adapter.addEventListener(
             'load',
             e => {

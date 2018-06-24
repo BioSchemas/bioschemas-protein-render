@@ -1,7 +1,7 @@
-import BioschemasUniProtRender from './BioschemasUniProtRender';
+import BioschemasProteinRender from './BioschemasProteinRender';
 
 if (window.customElements) {
-    customElements.define('bioschemas-uniprot-render', BioschemasUniProtRender);
+    customElements.define('bioschemas-protein-render', BioschemasProteinRender);
 }
 
-export default BioschemasUniProtRender;
+export default BioschemasProteinRender;
