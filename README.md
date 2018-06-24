@@ -49,7 +49,9 @@ corresponding PDBe 3D structure markup. It finally renders the JSON-LD for both.
 infobox would render not the JSON-LD as it is, but would use it to create something more human-readable and
 visual-appealing summary. That would be the next step once a crawler is available (so the markup is directly taken from
 the web pages). See it in action here with the default accession [P12272](http://bioschemas.org/bioschemas-protein-render/poc.html) 
-or with a different accession [P05067](http://bioschemas.org/bioschemas-protein-render/poc.html?P05067)
+or with a different accession [P05067](http://bioschemas.org/bioschemas-protein-render/poc.html?P05067). This is just a proof of concept
+so not all UniProt accessions will work, we have not checked for possible exceptions. We have tested with some
+[human proteins with available 3D structures](http://www.uniprot.org/uniprot/?query=database%3a(type%3apdb)&fil=reviewed%3ayes+AND+organism%3a%22Homo+sapiens+(Human)+%5b9606%5d%22&columns=id%2centry+name%2creviewed%2cprotein+names%2cgenes%2corganism%2clength&offset=0&sort=score). 
 
 ## Links
 * [1] [Protein use](http://bioschemas.org/useCases/Proteins/)
