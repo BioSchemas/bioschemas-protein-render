@@ -1,4 +1,4 @@
-#Protein working group - Bioschemas implementation study - Year 1
+# Protein working group - Bioschemas implementation study - Year 1
 The Protein working group was lead by Maria Martin and counted with the participation of people from UniProt (Maria Martin, Leyla Garcia), 
 InterPro (Rob Finn, Aurelièn Luciani and Gustavo Salazar) and PDBe (Sameer Verlanka and Joseph Anyango).
 The Protein working group aimed to define, prototype and test a schema.org to represent protein sequences as well as

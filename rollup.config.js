@@ -4,9 +4,9 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 export default {
     input: 'src/index.js',
     output: {
-        file: 'dist/BioschemasUniProtRender.js',
+        file: 'dist/BioschemasProteinRender.js',
         format: 'iife',
-        name: 'BioschemasUniProtRender',
+        name: 'BioschemasProteinRender',
         sourcemap: true,
         globals: {
             'protvista-uniprot-entry-adapter': 'ProtVistaUniProtEntryAdapter'
