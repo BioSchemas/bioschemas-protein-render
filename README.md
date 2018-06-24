@@ -48,8 +48,8 @@ It then takes from this markup the first PDBe 3D structure, and uses bioschemas-
 corresponding PDBe 3D structure markup. It finally renders the JSON-LD for both. A more elaborated
 infobox would render not the JSON-LD as it is, but would use it to create something more human-readable and
 visual-appealing summary. That would be the next step once a crawler is available (so the markup is directly taken from
-the web pages). See it in action here with the default accession [P12272](http://bioschemas.org/bioschemas-uniprot-render/poc.html) 
-or with a different accession [P05067](http://bioschemas.org/bioschemas-uniprot-render/poc.html?P05067)
+the web pages). See it in action here with the default accession [P12272](http://bioschemas.org/bioschemas-protein-render/poc.html) 
+or with a different accession [P05067](http://bioschemas.org/bioschemas-protein-render/poc.html?P05067)
 
 ## Links
 * [1] [Protein use](http://bioschemas.org/useCases/Proteins/)
