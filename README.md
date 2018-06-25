@@ -8,7 +8,7 @@ See the prototype in action here with the default accession [P12272](http://bios
 
 One of the advantages of [Bioschemas](https://bioschemas.org) is the possibility of retrieving mark up from multiple complimentary sources in order to create a quick and short summary, i.e., infobox. In the protein case, this can be easily achieved as UniProt, InterPro and PDBe link and complement each other. Ideally a crawler would be used to retrieve information from these three sources. A [Bioschemas crawler](http://bioschemas.org/tools/) is under construction but not yet finalized; thus we use here a minimalistic approach to show how an infobox could work.
 
-We have develop two web components capable of generating Bioschemas markup from web services. The first one,
+We have developed two web components capable of generating Bioschemas markup from web services. The first one,
 [bioschemas-uniprot-adapter](https://github.com/BioSchemas/bioschemas-uniprot-adapter), serves Bioschemas markup for a UniProt entry, while the second, [bioschemas-pdbe-adapter](https://github.com/BioSchemas/bioschemas-pdbe-adapter) does it for a PDBe 3D structure entry. Both web components are put together by a third one, [bioschemas-protein-render](https://github.com/BioSchemas/bioschemas-protein-render).
 
 [bioschemas-protein-render](https://github.com/BioSchemas/bioschemas-protein-render) takes a hard-coded UniProt entry, [P12272](http://www.uniprot.org/uniprot/P12272), and retrieves its mark up via [bioschemas-uniprot-adapter](https://github.com/BioSchemas/bioschemas-uniprot-adapter). 
